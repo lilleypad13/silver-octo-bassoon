@@ -9,7 +9,7 @@ public class CameraController : MonoBehaviour
     public float minY = 10f;
     public float maxY = 80f;
 
-    //private bool doMovement = true;
+    private bool isLocked = false;
     #endregion
 
 
@@ -23,15 +23,35 @@ public class CameraController : MonoBehaviour
             return;
         }
 
-        //if (Input.GetKeyDown(KeyCode.Escape)){
-        //    doMovement = !doMovement;
-        //}
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            isLocked = !isLocked;
+        }
 
-        //if (!doMovement)
-        //{
-        //    return;
-        //}
+        if(isLocked == false)
+        {
+            MoveCamera();
+            ZoomCamera();
+        }
+    }
 
+
+    private void ZoomCamera()
+    {
+        float scroll = Input.GetAxis("Mouse ScrollWheel");
+
+        Vector3 pos = transform.position;
+
+        // Want to add some large multiplication factor becasue scrollSpeed is normally a very small number
+        pos.y -= scroll * 1000 * scrollSpeed * Time.deltaTime;
+        pos.y = Mathf.Clamp(pos.y, minY, maxY);
+
+        transform.position = pos;
+    }
+
+
+    private void MoveCamera()
+    {
         if (Input.GetKey("w") || Input.mousePosition.y >= Screen.height - panBorderThickness)
         {
             transform.Translate(Vector3.forward * panSpeed * Time.deltaTime, Space.World);
@@ -48,16 +68,6 @@ public class CameraController : MonoBehaviour
         {
             transform.Translate(Vector3.left * panSpeed * Time.deltaTime, Space.World);
         }
-
-        float scroll = Input.GetAxis("Mouse ScrollWheel");
-
-        Vector3 pos = transform.position;
-
-        // Want to add some large multiplication factor becasue scrollSpeed is normally a very small number
-        pos.y -= scroll * 1000 * scrollSpeed * Time.deltaTime;
-        pos.y = Mathf.Clamp(pos.y, minY, maxY);
-
-        transform.position = pos;
     }
 
 
