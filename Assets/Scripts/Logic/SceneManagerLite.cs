@@ -12,14 +12,14 @@ public class SceneManagerLite : MonoBehaviour
     private float _loadingProgress;
     public float LoadingProgress { get { return _loadingProgress; } }
 
-
+    // Fade In/Out Fields
+    [Header("Fade In and Out Fields")]
     public Image img;
     public AnimationCurve curve;
 
-    public int buildIndexToUnload;
-    public int buildIndexToLoad;
-
-    public int currentLevelBuildIndex;
+    // Scene Index Variables
+    private int currentLevelBuildIndex;
+    [Header("Important Scene Indices to Set")]
     public int baseSceneBuildIndex = 1;
     public int mainMenuBuildIndex = 2;
     public int levelSelectorSceneBuildIndex = 3;
@@ -53,6 +53,10 @@ public class SceneManagerLite : MonoBehaviour
         return sceneManagerLiteInstance;
     }
 
+
+    /*
+     * Fade in effect that controls image alpha with Unity curve
+     */
     IEnumerator FadeIn()
     {
         float t = 1.0f;
@@ -66,6 +70,10 @@ public class SceneManagerLite : MonoBehaviour
         }
     }
 
+
+    /*
+     * Fade out effect that controls image alpha with Unity curve
+     */
     IEnumerator FadeOut()
     {
         float t = 0.0f;
@@ -79,11 +87,32 @@ public class SceneManagerLite : MonoBehaviour
         }
     }
 
+
+    public int GetCurrentLevelBuildIndex()
+    {
+        return currentLevelBuildIndex;
+    }
+
+    public void SetCurrentLevelBuildIndex(int index)
+    {
+        currentLevelBuildIndex = index;
+    }
+
+
+    /*
+     * Takes in an array of scene indices to determine which scenes to load and an array of scene indices to determine which 
+     * to unload.
+     * Also takes an index of which of the loaded scene to set as the new active scene.
+     */
     private void SceneTransition(int [] buildIndicesToBeLoaded, int[] buildIndicesToBeUnloaded, int activeSceneIndex)
     {
         StartCoroutine(SceneTransitionRoutine(buildIndicesToBeLoaded, buildIndicesToBeUnloaded, activeSceneIndex));
     }
 
+
+    /*
+     * The coroutine controlling the flow of the async scene loading and unloading
+     */
     private IEnumerator SceneTransitionRoutine (int[] buildIndicesToBeLoaded, int[] buildIndicesToBeUnloaded, int activeSceneIndex)
     {
         yield return StartCoroutine(FadeOut());
@@ -103,6 +132,10 @@ public class SceneManagerLite : MonoBehaviour
         yield return StartCoroutine(FadeIn());
     }
 
+
+    /*
+     * Controls the scenes to be loaded/unloaded when the player initially presses Play on the game opening screen
+     */
     public void Play()
     {
         int[] scenesToBeLoaded = { levelSelectorSceneBuildIndex };
@@ -111,6 +144,9 @@ public class SceneManagerLite : MonoBehaviour
         SceneTransition(scenesToBeLoaded, scenesToBeUnloaded, levelSelectorSceneBuildIndex);
     }
 
+    /*
+     * Controls the scenes to be loaded/unloaded when the player retries a level
+     */
     public void RetryLevel()
     {
         int[] scenesToBeLoaded = { currentLevelBuildIndex };
@@ -119,6 +155,10 @@ public class SceneManagerLite : MonoBehaviour
         SceneTransition(scenesToBeLoaded, scenesToBeUnloaded, currentLevelBuildIndex);
     }
 
+
+    /*
+     * Controls the scenes to be loaded/unloaded when the player goes from a level to the level select menu
+     */
     public void Menu()
     {
         int[] scenesToBeLoaded = { levelSelectorSceneBuildIndex };
@@ -127,6 +167,11 @@ public class SceneManagerLite : MonoBehaviour
         SceneTransition(scenesToBeLoaded, scenesToBeUnloaded, levelSelectorSceneBuildIndex);
     }
 
+
+    /*
+     * Controls the scenes to be loaded/unloaded when the player wants to progress directly from the current level 
+     * to the next level upon victory.
+     */
     public void NextLevel()
     {
         // The next level should consistently have a build index of one greater than the current level's build index.
@@ -136,6 +181,11 @@ public class SceneManagerLite : MonoBehaviour
         SceneTransition(scenesToBeLoaded, scenesToBeUnloaded, currentLevelBuildIndex + 1);
     }
 
+
+    /*
+     * Controls the scenes to be loaded/unloaded when the player selects a level to start from the level 
+     * select menu.
+     */
     public void SelectLevel(int levelSelected)
     {
         // This remains true as long as the levelSelector's build index is the one directly before all of the levels.
@@ -146,18 +196,19 @@ public class SceneManagerLite : MonoBehaviour
         currentLevelBuildIndex = levelSelectedBuildIndex;
         Debug.Log("currentLevelBuildIndex from SelectLevel method is: " + currentLevelBuildIndex);
 
-        //FadeTo(levelSelectorSceneBuildIndex, levelSelectedBuildIndex);
-        //LoadSceneAdditive(baseSceneBuildIndex);
-
         int[] scenesToBeLoaded = { baseSceneBuildIndex, currentLevelBuildIndex };
-        //int[] scenesToBeLoaded = { currentLevelBuildIndex, baseSceneBuildIndex };
         int[] scenesToBeUnloaded = { levelSelectorSceneBuildIndex };
 
         SceneTransition(scenesToBeLoaded, scenesToBeUnloaded, currentLevelBuildIndex);
     }
 
 
-
+    // The following methods are all from:
+    // http://myriadgamesstudio.com/how-to-use-the-unity-scenemanager/
+    // These are the core of running the multiple scene system with async loading
+    // They have been edited slightly from their initial conditions since I am 
+    // not currently using any loading screen and am using scene indices instead 
+    // of scene names as inputs.
 
     public void LoadScene(int sceneToLoadBuildIndex)
     {

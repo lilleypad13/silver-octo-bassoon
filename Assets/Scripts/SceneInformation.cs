@@ -7,7 +7,7 @@ public class SceneInformation : MonoBehaviour
 {
     #region Variables
 
-    int thisLevelBuildIndex;
+    private int thisLevelBuildIndex;
 
     private SceneManagerLite sceneManagerLiteReference;
 
@@ -21,7 +21,7 @@ public class SceneInformation : MonoBehaviour
 
         sceneManagerLiteReference = SceneManagerLite.GetInstance();
 
-        sceneManagerLiteReference.currentLevelBuildIndex = thisLevelBuildIndex;
+        sceneManagerLiteReference.SetCurrentLevelBuildIndex(thisLevelBuildIndex);
 
         Debug.Log("SceneInformation says thisLevelBuildIndex is: " + thisLevelBuildIndex);
     }
