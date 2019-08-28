@@ -11,10 +11,14 @@ public class LevelManager : MonoBehaviour
     private SceneManagerLite sceneManagerLiteReference;
     private PlayerStats playerStatsReference;
 
-    public static bool GameIsOver;
+    private bool GameIsOver;
 
     public GameObject gameOverUI;
     public GameObject completeLevelUI;
+
+    public CameraController gameCamera;
+
+    static LevelManager levelManagerInstance;
     #endregion
 
     #region Unity Methods
@@ -25,10 +29,17 @@ public class LevelManager : MonoBehaviour
         playerStatsReference = PlayerStats.GetInstance();
         waveSpawnerReference = WaveSpawner.GetInstance();
 
+
+        if (levelManagerInstance != null)
+        {
+            Debug.Log("More than one LevelManager in scenes.");
+            return;
+        }
+        levelManagerInstance = this;
         // Reset the wave spawner each time a level loads
         //waveSpawnerReference.resetWaveSpawner();
 
-        GameIsOver = false;
+        StartLevel();
     }
 
     private void Update()
@@ -53,19 +64,14 @@ public class LevelManager : MonoBehaviour
 
     private void LoseLevel()
     {
-        GameIsOver = true;
-        waveSpawnerReference.DeactivateWaveSpawner();
-
+        EndLevel();
         gameOverUI.SetActive(true);
     }
 
     private void WinLevel()
     {
-        GameIsOver = true;
-        waveSpawnerReference.DeactivateWaveSpawner();
-
+        EndLevel();
         gameManagerReference.WinLevel();
-
         completeLevelUI.SetActive(true);
     }
 
@@ -76,7 +82,32 @@ public class LevelManager : MonoBehaviour
     {
         waveSpawnerReference.DeactivateWaveSpawner();
     }
-    
 
+
+    /*
+     * Actions to perform indicating the level has ended
+     */
+    private void EndLevel()
+    {
+        GameIsOver = true;
+        waveSpawnerReference.DeactivateWaveSpawner();
+        gameCamera.enabled = false;
+    }
+
+
+    /*
+     * Actions to perform to start level
+     */
+    public void StartLevel()
+    {
+        GameIsOver = false;
+        gameCamera.enabled = true;
+    }
+
+
+    public static LevelManager GetInstance()
+    {
+        return levelManagerInstance;
+    }
     #endregion
 }
