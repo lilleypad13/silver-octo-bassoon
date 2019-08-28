@@ -51,10 +51,7 @@ public class WaveSpawner : MonoBehaviour
 
         if (waveIndex >= waves.Length)
         {
-            //gameManager.WinLevel();
-            //this.enabled = false;
             return;
-            //Debug.Log("Wave Spawner has deactivated itself because it has spawned the final wave.");
         }
 
         if (countdown <= 0f)
@@ -159,10 +156,6 @@ public class WaveSpawner : MonoBehaviour
      */
     public void resetWaveSpawner()
     {
-        //if(spawnWave != null)
-        //{
-        //    StopCoroutine(spawnWave);
-        //}
         wavesFinished = false;
         enemiesAlive = 0;
         waveIndex = 0;
