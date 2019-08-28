@@ -127,6 +127,7 @@ public class SceneManagerLite : MonoBehaviour
             yield return StartCoroutine(UnloadSceneRoutine(buildIndex));
         }
 
+        Debug.Log("Will attempt to set this scene index to active: " + activeSceneIndex);
         SceneManager.SetActiveScene(SceneManager.GetSceneByBuildIndex(activeSceneIndex));
 
         yield return StartCoroutine(FadeIn());
@@ -178,7 +179,11 @@ public class SceneManagerLite : MonoBehaviour
         int[] scenesToBeLoaded = { currentLevelBuildIndex + 1 };
         int[] scenesToBeUnloaded = { currentLevelBuildIndex };
 
-        SceneTransition(scenesToBeLoaded, scenesToBeUnloaded, currentLevelBuildIndex + 1);
+        // Need to set currentLevelBuildIndex so that it reflects the proper level index
+        // Done here for readability in scenesToBeLoaded and scenesToBeUnloaded above
+        currentLevelBuildIndex++;
+
+        SceneTransition(scenesToBeLoaded, scenesToBeUnloaded, currentLevelBuildIndex);
     }
 
 
