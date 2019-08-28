@@ -1735,6 +1735,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: LevelManager
       objectReference: {fileID: 0}
+    - target: {fileID: 7265269565331299096, guid: 1758ec518922a584cb9f52d336ce052c,
+        type: 3}
+      propertyPath: pauseMenuUI
+      value: 
+      objectReference: {fileID: 1140050293}
+    - target: {fileID: 7265269565331299096, guid: 1758ec518922a584cb9f52d336ce052c,
+        type: 3}
+      propertyPath: gameOverUI
+      value: 
+      objectReference: {fileID: 114052410}
+    - target: {fileID: 7265269565331299096, guid: 1758ec518922a584cb9f52d336ce052c,
+        type: 3}
+      propertyPath: completeLevelUI
+      value: 
+      objectReference: {fileID: 765973434}
     - target: {fileID: 7265269565331299098, guid: 1758ec518922a584cb9f52d336ce052c,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1800,21 +1815,11 @@ PrefabInstance:
       propertyPath: completeLevelUI
       value: 
       objectReference: {fileID: 765973434}
-    - target: {fileID: 7265269565331299096, guid: 1758ec518922a584cb9f52d336ce052c,
+    - target: {fileID: 7265269565331299097, guid: 1758ec518922a584cb9f52d336ce052c,
         type: 3}
-      propertyPath: pauseMenuUI
+      propertyPath: gameCamera
       value: 
-      objectReference: {fileID: 1140050293}
-    - target: {fileID: 7265269565331299096, guid: 1758ec518922a584cb9f52d336ce052c,
-        type: 3}
-      propertyPath: gameOverUI
-      value: 
-      objectReference: {fileID: 114052410}
-    - target: {fileID: 7265269565331299096, guid: 1758ec518922a584cb9f52d336ce052c,
-        type: 3}
-      propertyPath: completeLevelUI
-      value: 
-      objectReference: {fileID: 765973434}
+      objectReference: {fileID: 534669906}
     - target: {fileID: 7265269565331299099, guid: 1758ec518922a584cb9f52d336ce052c,
         type: 3}
       propertyPath: nodeUI
