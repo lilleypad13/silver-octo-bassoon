@@ -17,12 +17,6 @@ public class CameraController : MonoBehaviour
 
     private void Update()
     {
-        //if (LevelManager.GameIsOver)
-        //{
-        //    this.enabled = false;
-        //    return;
-        //}
-
         if (Input.GetKeyDown(KeyCode.Space))
         {
             isLocked = !isLocked;
