@@ -1293,6 +1293,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: OverlayCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 1380513840649699701, guid: e37cbbf3e0f741845a711d9fe3f8ebd3,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1380513840755044177, guid: e37cbbf3e0f741845a711d9fe3f8ebd3,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1479,6 +1484,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1053548112}
     - target: {fileID: 1380513842264590071, guid: e37cbbf3e0f741845a711d9fe3f8ebd3,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1053548112}
+    - target: {fileID: 1380513840583688241, guid: e37cbbf3e0f741845a711d9fe3f8ebd3,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1053548112}
+    - target: {fileID: 1380513840900876361, guid: e37cbbf3e0f741845a711d9fe3f8ebd3,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
