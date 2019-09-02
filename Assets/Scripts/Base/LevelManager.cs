@@ -11,8 +11,6 @@ public class LevelManager : MonoBehaviour
     private SceneManagerLite sceneManagerLiteReference;
     private PlayerStats playerStatsReference;
 
-    private bool GameIsOver;
-
     public GameObject gameOverUI;
     public GameObject completeLevelUI;
 
@@ -39,23 +37,24 @@ public class LevelManager : MonoBehaviour
         // Reset the wave spawner each time a level loads
         //waveSpawnerReference.resetWaveSpawner();
 
-        StartLevel();
+        //StartLevel();
     }
 
     private void Update()
     {
-        if (GameIsOver)
+        if (gameManagerReference.GetGameIsOver())
         {
             return;
         }
 
-        if (playerStatsReference.playerLives <= 0 && GameIsOver == false)
+        if (playerStatsReference.playerLives <= 0 && gameManagerReference.GetGameIsOver() == false)
         {
             Debug.Log("The player has " + playerStatsReference.playerLives + " lives and has lost.");
             LoseLevel();
         }
 
-        if (waveSpawnerReference.isActiveAndEnabled && waveSpawnerReference.WavesFinished() && waveSpawnerReference.enemiesAlive == 0 && GameIsOver == false)
+        if (waveSpawnerReference.isActiveAndEnabled && waveSpawnerReference.WavesFinished() && 
+            waveSpawnerReference.enemiesAlive == 0 && gameManagerReference.GetGameIsOver() == false)
         {
             Debug.Log("The player has won! (Dictated by LevelManager)");
             WinLevel();
@@ -89,18 +88,17 @@ public class LevelManager : MonoBehaviour
      */
     private void EndLevel()
     {
-        GameIsOver = true;
+        gameManagerReference.EndGame();
         waveSpawnerReference.DeactivateWaveSpawner();
         gameCamera.enabled = false;
     }
 
 
     /*
-     * Actions to perform to start level
+     * Activates the Camera Controller
      */
-    public void StartLevel()
+    public void EnableCameraController()
     {
-        GameIsOver = false;
         gameCamera.enabled = true;
     }
 

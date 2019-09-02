@@ -8,6 +8,8 @@ public class GameManager : MonoBehaviour
 
     static GameManager gameManagerInstance;
 
+    private bool gameIsOver;
+
     public int currentLevelBuildIndex;
     public int levelToUnlock;
     public int currentMaxLevelUnlocked;
@@ -25,12 +27,39 @@ public class GameManager : MonoBehaviour
         }
         gameManagerInstance = this;
 
+        gameIsOver = true;
+
         currentMaxLevelUnlocked = PlayerPrefs.GetInt(levelReached, 1);
     }
 
     public static GameManager GetInstance()
     {
         return gameManagerInstance;
+    }
+
+
+    public bool GetGameIsOver()
+    {
+        return gameIsOver;
+    }
+
+    /*
+     * Called to start a level
+     * Signal in game processes to start
+     */
+    public void StartGame()
+    {
+        gameIsOver = false;
+    }
+
+
+    /*
+     * Called to end a level
+     * Stop in game processes and submit to the UI menus
+     */
+    public void EndGame()
+    {
+        gameIsOver = true;
     }
 
     public void WinLevel()
