@@ -19,7 +19,6 @@ public class RoundsSurvived : MonoBehaviour
         playerStatsReference = PlayerStats.GetInstance();
 
         StartCoroutine(AnimateText());
-        roundsText.text = playerStatsReference.rounds.ToString();
     }
 
     IEnumerator AnimateText()
