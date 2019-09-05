@@ -1298,6 +1298,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1380513841263419381, guid: e37cbbf3e0f741845a711d9fe3f8ebd3,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1380513840755044177, guid: e37cbbf3e0f741845a711d9fe3f8ebd3,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1498,8 +1503,25 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1053548112}
+    - target: {fileID: 1380513840744858544, guid: e37cbbf3e0f741845a711d9fe3f8ebd3,
+        type: 3}
+      propertyPath: roundsText
+      value: 
+      objectReference: {fileID: 1380513840552463440}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e37cbbf3e0f741845a711d9fe3f8ebd3, type: 3}
+--- !u!114 &1380513840552463440 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1380513840744858546, guid: e37cbbf3e0f741845a711d9fe3f8ebd3,
+    type: 3}
+  m_PrefabInstance: {fileID: 1380513840552463439}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &3889098586766815683
 PrefabInstance:
   m_ObjectHideFlags: 0
